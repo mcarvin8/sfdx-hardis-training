@@ -47,6 +47,15 @@ jobs:
           persist-credentials: true
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0 # Fetch all branches
+      # Install apex-code-coverage-transformer plugin, which converts the deployment's
+      # Apex code coverage to the format set in .apexcodecovtransformer.config.json.
+      # The plugin is unsigned, so "echo y" answers the CLI's install confirmation.
+      - name: Install apex-code-coverage-transformer plugin
+        if: ${{ !startsWith(github.head_ref, 'auto-fix/') &&
+          !startsWith(github.ref_name, 'auto-fix/') }}
+        run: |
+          echo y | sf plugins install apex-code-coverage-transformer
+          sf plugins
       # Login & check deploy with test classes & code coverage
       - name: Login & Simulate deployment
         if: ${{ !startsWith(github.head_ref, 'auto-fix/') &&
