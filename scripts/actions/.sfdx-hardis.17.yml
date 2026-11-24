@@ -1,0 +1,9 @@
+commandsPostDeploy:
+  - id: 36afc11e-97cd-4426-bd5f-729a7aa6d44d
+    label: Brind Handover Items
+    type: data
+    command: ""
+    parameters:
+      sfdmuProject: HandoverItemRefData
+    runOnlyOnceByOrg: true
+    context: process-deployment-only
